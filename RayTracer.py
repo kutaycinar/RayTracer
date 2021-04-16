@@ -55,6 +55,7 @@ for r in range(height):
 # --------------------------- #
 
 # outputPPM(OUTPUT, width, height, color) # save ppm (assignment requirement)
-plt.imsave(OUTPUT[:-3]+'png', color) # save png
+
+plt.imsave(OUTPUT[:-3]+'png', np.clip(color, 0, 1)) # save png
 
 # end of file
