@@ -11,3 +11,9 @@ This is my implementation of a ray tracer created in Python for the final assign
 ## Diffuse
 
 ## Specular
+
+## Reflection
+
+## Shadow
+
+## Illumination
