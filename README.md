@@ -24,6 +24,10 @@ It outputs a rendered image file in color with ambient, diffuse, specular, refle
 
 <img src="https://raw.githubusercontent.com/kutaycinar/RayTracer/main/tests/testReflection.png" width="200" height="200">
 
+## Intersection
+
+<img src="https://raw.githubusercontent.com/kutaycinar/RayTracer/main/tests/testIntersection.png" width="200" height="200">
+
 ## Shadow
 
 <img src="https://raw.githubusercontent.com/kutaycinar/RayTracer/main/tests/testShadow.png" width="200" height="200">
@@ -31,7 +35,3 @@ It outputs a rendered image file in color with ambient, diffuse, specular, refle
 ## Illumination
 
 <img src="https://raw.githubusercontent.com/kutaycinar/RayTracer/main/tests/testIllum.png" width="200" height="200">
-
-## Intersection
-
-<img src="https://raw.githubusercontent.com/kutaycinar/RayTracer/main/tests/testIntersection.png" width="200" height="200">
