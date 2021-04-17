@@ -134,21 +134,6 @@ def parseTXT(fname):
 
 	return NEAR, LEFT, RIGHT, BOTTOM, TOP, RES, SPHERES, LIGHTS, BACK, AMBIENT, OUTPUT
 
-def progress(current, end, length=25):
-	"""
-	Report the progress in the format: 'RayTracing: [++++++-------------------] 25.2%'
-	:param current: current position on loading bar
-	:param end: last position on loading bar
-	:param: length: loading bar size (default 25)
-	""" 
-	percent = current / end
-	hashes = '+' * int(round(percent * length, 1))
-	dashes = '-' * (length - len(hashes))
-	sys.stdout.write(f'\rRayTracing: [{hashes + dashes}] {round(percent * 100, 1)}%')
-	sys.stdout.flush()
-	if percent == 1:
-		print('')
-
 def normalize(vector):
 	"""
 	Normalize function.
@@ -172,7 +157,7 @@ def sphere_intersect(ray_origin, ray_direction, sphere):
 	c = LA.norm(ray_origin)**2 - 1
 	d = b ** 2 - a * c 
 
-	# Discrement >= 0 means two solutions
+	# Discriminant >= 0 means two solutions
 	if d >= 0:
 		x1 = (-b + np.sqrt(d)) / (a)
 		x2 = (-b - np.sqrt(d)) / (a)
@@ -268,9 +253,10 @@ def raytrace(ray_origin, ray_direction, spheres, lights, depth, scene_ambient, b
 	N = np.matmul(LA.inv(sphere['matrix'].transpose()), np.matmul(np.append(N, 1), sphere['matrix_inv']))[:3]
 	N = normalize(N)
 	
-	# EDGE CASE: Backface
+	# EDGE CASE: Back face detection
 	if np.dot(ray_direction, N) > 0 and depth == 1:
-		# SPECIAL CASE: Check if a light exists within sphere
+		
+		# SPECIAL CASE: Check if a light exists within the sphere
 		for light in lights:
 			L = light['pos'] - P
 			intersect = closest_intersect(P, L, spheres, lights)
@@ -319,6 +305,21 @@ def raytrace(ray_origin, ray_direction, spheres, lights, depth, scene_ambient, b
 	# Return all color information
 	return ambient + diffuse + specular + reflection
 
+def progress(current, end, length=25):
+	"""
+	Report the progress in the format: 'RayTracing: [++++++-------------------] 25.2%'
+	:param current: current position on loading bar
+	:param end: last position on loading bar
+	:param: length: loading bar size (default 25)
+	""" 
+	percent = current / end
+	hashes = '+' * int(round(percent * length, 1))
+	dashes = '-' * (length - len(hashes))
+	sys.stdout.write(f'\rRayTracing: [{hashes + dashes}] {round(percent * 100, 1)}%')
+	sys.stdout.flush()
+	if percent == 1:
+		print('')
+		
 def outputPPM(filename, width, height, image, maxval=255):
 	"""
 	Outputs images in .ppm format (P6).
